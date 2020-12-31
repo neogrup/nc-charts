@@ -1,31 +1,30 @@
-import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
+import {PolymerElement, html} from '@polymer/polymer/polymer-element.js'
+import {HighchartsPolymer} from './nc-charts-behavior.js'
+import {SharedStyles} from './shared-styles.js';
 
-/**
- * `nc-charts`
- * 
- *
- * @customElement
- * @polymer
- * @demo demo/index.html
- */
-class NcCharts extends PolymerElement {
+
+class NcCharts extends HighchartsPolymer.ChartBehavior(HighchartsPolymer.BaseBehavior(PolymerElement)) {
   static get template() {
     return html`
-      <style>
-        :host {
-          display: block;
-        }
-      </style>
-      <h2>Hello [[prop1]]!</h2>
+      ${SharedStyles}
+      <div id="Chart"  on-click="_checkSelected"></div>
+      <slot></slot>
     `;
   }
+  
   static get properties() {
     return {
-      prop1: {
-        type: String,
-        value: 'nc-charts',
-      },
+      type: {
+        type: String, 
+        value: 'spline', 
+        observer: '_updateType'
+      }
     };
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.__createChart()
   }
 }
 

@@ -1,33 +1,134 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+<!--
+@license
+Copyright (c) 2017 Neo
+-->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
-    <title>nc-charts demo</title>
+  <title>nc-charts demo</title>
 
-    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
-    <script type="module">
-      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
-      import '@polymer/iron-demo-helpers/demo-snippet';
-    </script>
+</head>
+<body unresolved>
+  <script type="module">
+    import {html} from '@polymer/polymer/lib/utils/html-tag.js';
+    import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+    import '@polymer/iron-demo-helpers/demo-snippet';
+    import '../nc-charts.js';
 
-    <script type="module" src="../nc-charts.js"></script>
+    const template = html`
+      <custom-style>
+        <style is="custom-style" include="demo-pages-shared-styles"></style>
+        <style>
+          .stats-container {
+            @apply --layout-horizontal;
+            @apply --layout-wrap;
+          }
 
-    <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles">
-      </style>
-    </custom-style>
-  </head>
-  <body>
-    <div class="vertical-section-container centered">
-      <h3>Basic nc-charts demo</h3>
-      <demo-snippet>
-        <template>
-          <nc-charts></nc-charts>
-        </template>
-      </demo-snippet>
-    </div>
-  </body>
+          paper-card.stats {
+            margin-bottom: 3px;
+            margin-right: 3px;
+            width: 100%; /* Depedends of container */ 
+          }
+
+          .stats-chart {
+            /* height: 440px; */
+            /* width: 700px; */
+
+            width: 100%; /* Depedends of container */ 
+          }
+
+          @media (max-width: 759px) {
+            paper-card.stats {
+              width: 100%;
+            }
+            .stats-chart {
+              width: 100%;
+            }
+          }
+
+          nc-charts{
+          --highcharts-min-height: 440px;
+          --highcharts-container:{
+            height: 440px;
+          }
+        </style>
+      </custom-style>
+    `;
+    document.body.appendChild(template.content);
+  </script>
+
+
+  <div class="vertical-section-container centered">
+    <demo-snippet>
+      <template>
+        <h3>Pie Chart</h3>
+        <paper-card class="stats">
+          <div class="stats-container">
+            <div class="stats-chart">
+              <nc-charts
+                      type="pie"
+                      mode="statsFamiliesSales"
+                      monochromatic
+                      color-by-point
+                      legend
+                      data='[["Valor A", 10],["Valor B",15],["Valor C",5],["Valor D", 20]]'>
+              </nc-charts>
+            </div>
+          </div>
+        </paper-card>
+      </template>
+    </demo-snippet>
+
+    <h3>Column Chart</h3>
+    <demo-snippet>
+      <template>
+        <paper-card class="stats">
+          <div class="stats-container">
+            <div class="stats-chart">
+              <nc-charts
+                      type="column"
+                      chart-height="220px"
+                      mode="statsHoursSales"
+                      color="#29b1eb"
+                      data='[["06h",0],["07h",165.7],["08h",196.37],["09h",228.63],["10h",268.22],["11h",23.92],["12h",0],["13h",0],["14h",0],["15h",0],["16h",0],["17h", 0],["18h", 0],["19h",0],["20h",0],["21h",0],["22h",0],["23h",0],["00+h",0],["01+h",0],["02+h",0],["03+h",0],["04+h",0],["05+h",0]]'>
+              </nc-charts>
+            </div>
+          </div>
+        </paper-card>
+      </template>
+    </demo-snippet>
+
+    <h3>Heatmap Chart</h3>
+    <demo-snippet>
+      <template>
+        <paper-card class="stats">
+          <div class="stats-container">
+            <div class="stats-chart">
+              <nc-charts
+                      type="heatmap"
+                      mode="statsHoursWeekSales"
+                      _legend
+                      color-axis='{"min": 0, "minColor": "#FFFFFF", "maxColor": "#253855"}'
+                      x-axis-categories='{"categories": ["19-04","20-04","21-04","22-04","23-04","24-04","25-04","26-04"]}'
+                      y-axis-categories='{"categories": ["05+h", "04+h", "03+h", "02+h", "01+h", "00+h", "23h", "22h", "21h", "20h", "19h", "18h", "17h", "16h", "15h", "14h", "13h", "12h", "11h", "10h", "09h", "08h", "07h", "06h", "05h", "04h", "03h", "02h"]}'
+                      data='[[0,0,0],[0,1,0],[0,2,0],[0,3,0],[0,4,0],[0,5,0],[0,6,0],[0,7,11.825],[0,8,72.6],[0,9,37.625],[0,10,9.3],[0,11,71.95],[0,12,37.8],[0,13,46.9],[0,14,37.2],[0,15,44.75],[0,16,12.225],[0,17,66.4],[0,18,36.25],[0,19,55.25],[0,20,42.945],[0,21,0],[0,22,0],[0,23,0],[0,24,0],[0,25,0],[0,26,0],[0,27,0],[1,0,0],[1,1,0],[1,2,0],[1,3,0],[1,4,0],[1,5,13.25],[1,6,23.025],[1,7,63.5],[1,8,22.375],[1,9,16.95],[1,10,71.725],[1,11,46.375],[1,12,159.6],[1,13,45.65],[1,14,28.585],[1,15,99.75],[1,16,71],[1,17,40.25],[1,18,50.175],[1,19,72.3],[1,20,37.55],[1,21,0],[1,22,0],[1,23,0],[1,24,0],[1,25,0],[1,26,0],[1,27,0],[2,0,0],[2,1,0],[2,2,0],[2,3,0],[2,4,0],[2,5,11.225],[2,6,50.3],[2,7,139.65],[2,8,19.95],[2,9,54.175],[2,10,40.5],[2,11,47.375],[2,12,79.5],[2,13,78.85],[2,14,53.6],[2,15,77.4],[2,16,52.2],[2,17,55.65],[2,18,37],[2,19,44.425],[2,20,0],[2,21,0],[2,22,0],[2,23,0],[2,24,0],[2,25,0],[2,26,0],[2,27,0],[3,0,0],[3,1,0],[3,2,0],[3,3,0],[3,4,0],[3,5,0],[3,6,0],[3,7,0.95],[3,8,26.08],[3,9,57.95],[3,10,20.9],[3,11,29.7],[3,12,107.15],[3,13,59.55],[3,14,52.35],[3,15,15.2],[3,16,66.55],[3,17,119.35],[3,18,42.65],[3,19,94.05],[3,20,0],[3,21,0],[3,22,0],[3,23,0],[3,24,0],[3,25,0],[3,26,0],[3,27,0],[4,0,0],[4,1,0],[4,2,0],[4,3,0],[4,4,0],[4,5,0],[4,6,4.8],[4,7,61.675],[4,8,21.6],[4,9,28],[4,10,84.6],[4,11,74.1],[4,12,34.825],[4,13,36.05],[4,14,25.75],[4,15,65.325],[4,16,57.225],[4,17,51.4],[4,18,84.25],[4,19,79.45],[4,20,33.4],[4,21,0],[4,22,0],[4,23,0],[4,24,0],[4,25,0],[4,26,0],[4,27,0],[5,0,0],[5,1,0],[5,2,0],[5,3,0],[5,4,0],[5,5,0],[5,6,0],[5,7,24.75],[5,8,65.6],[5,9,139.65],[5,10,50.375],[5,11,44.9],[5,12,92.95],[5,13,52.05],[5,14,52.075],[5,15,29.7],[5,16,21.26],[5,17,55.925],[5,18,54.15],[5,19,60.55],[5,20,66.275],[5,21,0],[5,22,0],[5,23,0],[5,24,0],[5,25,0],[5,26,0],[5,27,0],[6,0,0],[6,1,0],[6,2,0],[6,3,0],[6,4,0],[6,5,0],[6,6,3.05],[6,7,37.25],[6,8,34.825],[6,9,42.05],[6,10,16.1],[6,11,40.575],[6,12,51.775],[6,13,91.3],[6,14,59.575],[6,15,65.6],[6,16,29.205],[6,17,34.5],[6,18,24.15],[6,19,29.75],[6,20,71.675],[6,21,0],[6,22,0],[6,23,0],[6,24,0],[6,25,0],[6,26,0],[6,27,0],[7,0,0],[7,1,0],[7,2,0],[7,3,0],[7,4,0],[7,5,0],[7,6,0],[7,7,19.95],[7,8,31.4],[7,9,52],[7,10,57.7],[7,11,39.675],[7,12,106.1],[7,13,40.5],[7,14,58.125],[7,15,48.075],[7,16,85.275],[7,17,25.7],[7,18,77.9],[7,19,85.25],[7,20,60.85],[7,21,0],[7,22,0],[7,23,0],[7,24,0],[7,25,0],[7,26,0],[7,27,0]]'>
+
+              </nc-charts>
+            </div>
+          </div>
+        </paper-card>
+      </template>
+    </demo-snippet>
+
+    
+
+  </div>
+  
+</body>
 </html>
