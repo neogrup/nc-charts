@@ -233,7 +233,8 @@ export const HighchartsPolymer = {
                     chart: _extends({
                         renderTo: __app.$.Chart,
                         defaultSeriesType: this.type,
-                        animation: Highcharts.svg, // don't animate in old IE
+                        // animation: Highcharts.svg, // don't animate in old IE
+                        animation: false,
                         marginRight: 10,
                         events: {
                             click: function(e){__app._fire("chart-click",{e: e,chart: this,component:__app})},
