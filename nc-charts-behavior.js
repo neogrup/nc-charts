@@ -108,6 +108,19 @@ export const HighchartsPolymer = {
                       }
                     }
                     break;
+                  case "statsHoursCount":
+                    this.xAxis.type = "category";
+                    this.plotOptions = {
+                      column: {
+                        color: this.color,
+                        groupPadding: 0.01,
+                        tooltip: {
+                          'headerFormat': '{point.key}<br>',
+                          'pointFormat': '<b>{point.y}</b>'
+                        }
+                      }
+                    }
+                    break;
   
                   case "statsPayments":
                     this.xAxis.type = "category";
