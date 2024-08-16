@@ -10,7 +10,7 @@
     "url": "https://github.com/NEOGRUP/nc-charts"
   },
   "name": "@neogrup/nc-charts",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "resolutions": {
     "inherits": "2.0.3",
     "samsam": "1.1.3",
@@ -18,7 +18,7 @@
     "type-detect": "1.0.0"
   },
   "main": "nc-charts.js",
-  "author": "edgarpiera@gmail.com.com",
+  "author": "dpto.desarrollo@neogrup.com",
   "license": "MIT",
   "dependencies": {
     "@polymer/paper-card": "^3.0.0",
