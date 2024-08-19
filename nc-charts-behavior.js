@@ -341,7 +341,7 @@ export const HighchartsPolymer = {
                 const __app = this, isArr = x instanceof Array
                 if (!isArr) {x = _extends({name: (this.label||this.yLabel||this.xLabel),colorByPoint: this.colorByPoint},x)}
 
-                if ((this.mode == "statsHoursCount") || (this.mode == "statsHoursSales")){
+                if ((this.mode == "statsHoursCount") ){ //|| (this.mode == "statsHoursSales")
                   if (typeof this.xAxisCategories.categories=="undefined") {
                     this.xAxisCategories.categories = [];
                     x.forEach(d => this.xAxisCategories.categories.push(d[0]) );
